@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
-  const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/krishiai';
-
   try {
-    await mongoose.connect(mongoUri);
-    console.log(`MongoDB connected (${mongoUri})`);
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('MongoDB connected');
   } catch (err) {
     console.error('MongoDB connection error:', err.message);
     console.error('Tip: ensure MongoDB is running locally on 127.0.0.1:27017 or set a reachable MONGO_URI in server/.env');
-    process.exit(1);
+    // Don't exit — let server start so Render health check passes
+    setTimeout(connectDB, 5000); // retry after 5s
   }
 };
 

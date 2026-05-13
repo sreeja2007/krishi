@@ -16,6 +16,8 @@ app.use(cors({
 app.use(express.json());
 app.use('/api', apiLimiter);
 
+app.get('/health', (req, res) => res.json({ status: 'ok', time: new Date() }));
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/queries', require('./routes/queries'));
 app.use('/api/crops', require('./routes/crops'));

@@ -4,6 +4,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node app.js",
+    "build": "node seedData.js",
     "dev": "nodemon app.js",
     "seed": "node seedData.js"
   },
